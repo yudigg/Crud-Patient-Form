@@ -1,0 +1,43 @@
+﻿@using MvcApplication2.Models;
+@model IEnumerable<Patient>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="/public/delete.js"></script>
+</head>
+<body>
+    <div>
+        <h1>Patient List</h1>
+        <br />
+        <a href="/Patient/form" class=" btn btn-primary btn-lg">Add Patient</a>
+        <table class="table table-hover table-striped table-bordered ">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Insurace</th>
+            </tr>
+            @foreach (Patient p in Model)
+            {
+                <tr>
+                    <td>@p.Name</td>
+                    <td>@p.Age</td>
+                    <td>@p.Insurance</td>
+                    <td>
+                        <a href="/Patient/editForm?pid=@p.Id" class=" btn btn-primary btn-lg">Edit Patient</a>
+                    </td>
+                    <td>
+                        <form method="post" action="/patient/deleteForm">
+                            <input type="hidden" name="id" value="@p.Id" />
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>       
+    </div>
+</body>
+</html>
